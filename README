@@ -15,3 +15,7 @@ client2是客户端2，访问URL是http://localhost:8082/client2
 
 client3是客户端3，访问URL是http://localhost:8083/client3/simple
 页面显示一个table展示用户信息
+
+
+
+使用的技术，spring boot，oauth2，thymeleaf，jQuery，bootstrap等
