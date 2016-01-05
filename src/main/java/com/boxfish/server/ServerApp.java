@@ -109,8 +109,19 @@ public class ServerApp {
                     .refreshTokenValiditySeconds(60)
                     .authorities("ROLE_CLIENT")
                     .authorizedGrantTypes("authorization_code", "refresh_token")
-                    .scopes("read")
+                    .scopes("read").autoApprove(true) //自动授权
                     .redirectUris("http://localhost:8082/client2")
+
+                    .and()
+                    .withClient("client3")
+                    .secret("client3")
+                    .resourceIds(RESOURCE_ID)
+                    .accessTokenValiditySeconds(60)
+                    .refreshTokenValiditySeconds(60)
+                    .authorities("ROLE_CLIENT")
+                    .authorizedGrantTypes("authorization_code", "refresh_code")
+                    .scopes("read").autoApprove(true) //自动授权
+                    .redirectUris("http://localhost:8083/client3/simple")
             ;
         }
 

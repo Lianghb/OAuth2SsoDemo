@@ -1,0 +1,17 @@
+OAuth2的sso简单实现，配置了认证服务和资源服务，注册了3个客户端，都是自动授权，不需要用户授权
+
+登录用户名：user
+登录密码：123456
+
+client1是客户端1，访问URL是http://localhost:8081/client1
+页面会显示
+    result :
+    access protected resource!
+
+client2是客户端2，访问URL是http://localhost:8082/client2
+ 页面会显示
+     result :
+     access protected resource!
+
+client3是客户端3，访问URL是http://localhost:8083/client3/simple
+页面显示一个table展示用户信息
