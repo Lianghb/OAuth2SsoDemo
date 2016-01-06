@@ -1,11 +1,8 @@
-package com.boxfish.server;
+package com.boxfish.demo.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,31 +14,20 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Created by boxfish on 15/12/14.
+ * Created by boxfish on 16/1/5.
  */
 
-@SpringBootApplication
-@RestController
-public class ServerApp {
-    public static void main(String[] args) {
-        SpringApplication.run(ServerApp.class, args);
-    }
+@org.springframework.context.annotation.Configuration
+public class AuthenticationAndResourcesConfig {
 
     public static final String RESOURCE_ID = "test_resource";
-
 
     /**
      * 资源服务器配置
      */
-    @Configuration
+    @org.springframework.context.annotation.Configuration
     @EnableResourceServer
     protected static class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         private Logger logger = LoggerFactory.getLogger(getClass());
@@ -70,7 +56,7 @@ public class ServerApp {
     }
 
 
-    @Configuration
+    @org.springframework.context.annotation.Configuration
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
@@ -145,18 +131,4 @@ public class ServerApp {
             super.configure(security);
         }
     }
-
-
-    @RequestMapping("/oauth/user")
-    public Object getUserInfo(OAuth2Authentication authentication) throws Exception {
-        Map result = new HashMap<>(1);
-        result.put("aaa", "haha");
-        return result;
-    }
-
-    @RequestMapping("/protected")
-    public Object getMe() {
-        return "access protected resource";
-    }
-
 }

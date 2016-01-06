@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
+import java.security.Principal;
 
 /**
  * Created by boxfish on 15/12/29.
@@ -23,7 +23,6 @@ import java.net.URI;
 
 
 @SpringBootApplication
-@EnableOAuth2Client
 @EnableOAuth2Sso
 @RestController
 public class Client1App {
@@ -51,38 +50,23 @@ public class Client1App {
     }
 
     @RequestMapping("/hello")
-    public String hello(OAuth2Authentication authentication) {
-        return "hello, " + authentication.getName();
+    public String hello(Principal principal) {
+        return "hello, " + principal.getName();
     }
 
     @RequestMapping("/detail")
-    public Object details(OAuth2Authentication authentication) {
-        return authentication.getUserAuthentication();
+    public Object details(Authentication authentication) {
+        return authentication.getDetails();
     }
 
+
+    @RequestMapping("/scopes")
+    public Object scopes(Authentication authentication){
+        return authentication.getAuthorities();
+    }
 
     public <T> T getFrom(String url, Class<T> t) {
         return restTemplate.getForObject(URI.create(url), t);
     }
 
-
-//    @Configuration
-//    @EnableWebSecurity
-////    @EnableOAuth2Sso
-//    protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//        @Override
-//        public void configure(WebSecurity web) throws Exception {
-//            super.configure(web);
-//        }
-//
-//        @Override
-//        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//            super.configure(auth);
-//        }
-//
-//        @Override
-//        protected void configure(HttpSecurity http) throws Exception {
-//            http.antMatcher("/**").authorizeRequests().anyRequest().authenticated();
-//        }
-//    }
 }
