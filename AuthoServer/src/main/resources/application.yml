@@ -1,0 +1,38 @@
+server:
+  context-path: /server
+  port: 8090
+
+
+
+logging:
+  level:
+    com:
+      boxfish: info
+    org:
+      springframework:
+        security: debug
+        web: debug
+
+spring:
+  datasource:
+    url:  jdbc:mysql://192.168.0.100:3306/test?useUnicode=true&characterEncoding=utf8
+    username: boxfish
+    password: boxfish
+    driverClassName: com.mysql.jdbc.Driver
+    validation-query: SELECT 1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+  thymeleaf:
+    cache: false
+
+debug: true
+security:
+  user:
+    password: 111111

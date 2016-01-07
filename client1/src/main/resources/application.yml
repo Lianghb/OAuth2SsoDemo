@@ -1,0 +1,32 @@
+server:
+  context-path: /client1
+  port: 8081
+
+security:
+  oauth2:
+    client:
+      client-id: client1
+      client-secret: 123456
+      user-authorization-uri: http://localhost:8090/server/oauth/authorize
+      access-token-uri: http://localhost:8090/server/oauth/token
+      authentication-scheme: form
+    authorization:
+      check-token-access: http://localhost:8090/server/oauth/check_token
+#      token-key-access: http://localhost:8090/server/oauth/token_key
+    resource:
+#      user-info-uri: http://localhost:8090/server/oauth/user
+      jwt:
+        key-uri: http://localhost:8090/server/oauth/token_key
+#      token-info-uri: http://localhost:8090/server/oauth/resource_token
+#      prefer-token-info: false
+
+
+
+
+logging:
+  level:
+    demo: info
+    org:
+      springframework: debug
+
+#debug: true

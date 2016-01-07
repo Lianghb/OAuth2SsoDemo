@@ -1,5 +1,7 @@
 package com.boxfish.demo.controller;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,4 +22,10 @@ public class UserController {
         result.put("name", authentication.getName());
         return result;
     }
+
+//    @RequestMapping("/resource_token")
+//    public Object getTokenInfo(Authentication authentication) throws Exception {
+//        System.err.println(new ObjectMapper().writeValueAsString(authentication));
+//        return authentication;
+//    }
 }

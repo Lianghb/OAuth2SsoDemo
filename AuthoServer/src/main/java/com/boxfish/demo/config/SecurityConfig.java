@@ -86,12 +86,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(dbaUrls).hasRole("DBA")
 //        ;
         http
-                .authorizeRequests()
-                .antMatchers("/static/css/**").permitAll()
-                .anyRequest().fullyAuthenticated()
-
-                .and()
                 .httpBasic()
+                .and()
+                .authorizeRequests()
+//                .anyRequest().hasRole("USER")
+                .antMatchers("/oauth/token_key").permitAll()
+//                .anyRequest().fullyAuthenticated()
+//                .and()
 //                .formLogin().loginPage("/login")
 //                .failureUrl("/login?error").permitAll().and().logout().permitAll()
         ;

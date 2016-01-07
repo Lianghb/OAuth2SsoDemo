@@ -1,0 +1,53 @@
+server:
+  context-path: /client3/simple
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.0.100:3306/test?useUnicode=true&characterEncoding=utf8
+    username: boxfish
+    password: boxfish
+    driver-class-name: com.mysql.jdbc.Driver
+    validation-query: SELECT 1
+#    max-active: 200
+#    min-idle: 40
+#    max-idle: 100
+#    initial-size: 20
+
+  jpa:
+    database: MYSQL
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+
+logging:
+  level:
+    org:
+      springframework: info
+      hibernate:  info
+    com:
+      boxfish: info
+
+security:
+  oauth2:
+    client:
+      client-id: client3
+      client-secret: client3
+      user-authorization-uri: http://localhost:8090/server/oauth/authorize
+      access-token-uri: http://localhost:8090/server/oauth/token
+      authentication-scheme: form
+    resource:
+      user-info-uri: http://localhost:8090/server/oauth/user
+      token-info-uri: ttp://localhost:8090/server/oauth/resource_token
+      prefer-token-info: false
+    sso:
+      login-path: /login
+
+

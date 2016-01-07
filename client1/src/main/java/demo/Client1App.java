@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -26,6 +29,13 @@ import java.security.Principal;
 @EnableOAuth2Sso
 @RestController
 public class Client1App {
+
+    @Bean
+    public JwtAccessTokenConverter getJWtAccessTokenConverter(){
+//        OAuth2ClientAuthenticationProcessingFilter
+        return  new JwtAccessTokenConverter();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Client1App.class, args);
     }
