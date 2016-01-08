@@ -2,6 +2,8 @@ server:
   context-path: /client2
   port: 8082
 
+
+
 security:
   oauth2:
     client:
@@ -25,4 +27,4 @@ logging:
     com:
       boxfish: info
     org:
-      springframework: info
+      springframework: debug

@@ -27,6 +27,6 @@ logging:
   level:
     demo: info
     org:
-      springframework: debug
+      springframework: info
 
 #debug: true

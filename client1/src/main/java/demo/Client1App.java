@@ -8,8 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,11 +28,14 @@ import java.security.Principal;
 @SpringBootApplication
 @EnableOAuth2Sso
 @RestController
+@PropertySource("classpath:my.properties")
 public class Client1App {
+
+    @Autowired
+    Resources resources;
 
     @Bean
     public JwtAccessTokenConverter getJWtAccessTokenConverter(){
-//        OAuth2ClientAuthenticationProcessingFilter
         return  new JwtAccessTokenConverter();
     }
 
@@ -44,13 +47,35 @@ public class Client1App {
     @Autowired
     RestTemplate restTemplate;
 
+
     @RequestMapping("/")
     public String home(HttpServletRequest request) throws Exception {
         String result = null;
         if (logger.isDebugEnabled()) {
             printCookies(request);
         }
-        result = getFrom("http://localhost:8090/server/protected", String.class);
+        result = getFrom(resources.getResourceProtectedUrl(), String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/client1")
+    public String client1(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(resources.getResourceClient1Url(), String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/client2")
+    public String client2(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(resources.getResourceClient2Url(), String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/client3")
+    public String client3(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(resources.getResourceClient3Url(), String.class);
         return "result : <p>" + result + "!</p>";
     }
 
@@ -78,5 +103,7 @@ public class Client1App {
     public <T> T getFrom(String url, Class<T> t) {
         return restTemplate.getForObject(URI.create(url), t);
     }
+
+
 
 }

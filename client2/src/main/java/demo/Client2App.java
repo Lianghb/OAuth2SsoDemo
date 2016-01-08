@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,10 +26,24 @@ import java.net.URI;
 @SpringBootApplication
 @EnableOAuth2Sso
 @RestController
+@PropertySource("classpath:my.properties")
 public class Client2App {
     public static void main(String[] args) {
         SpringApplication.run(Client2App.class, args);
     }
+
+    @Value("${resource.client1.url}")
+    String client1Url;
+
+    @Value("${resource.client2.url}")
+    String client2Url;
+
+    @Value("${resource.client3.url}")
+    String client3Url;
+
+    @Value("${resource.protected.url}")
+    String protectedUrl;
+
 
     @Autowired
     RestTemplate restTemplate;
@@ -39,7 +56,7 @@ public class Client2App {
         if (logger.isDebugEnabled()) {
             printCookies(request);
         }
-        result = getFrom("http://localhost:8090/server/protected", String.class);
+        result = getFrom(protectedUrl, String.class);
         return "result : <p>" + result + "!</p>";
     }
 
@@ -58,6 +75,34 @@ public class Client2App {
         return authentication.getUserAuthentication();
     }
 
+
+    @RequestMapping("/client1")
+    public String client1(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(client1Url, String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/client2")
+    public String client2(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(client2Url, String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/client3")
+    public String client3(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(client3Url, String.class);
+        return "result : <p>" + result + "!</p>";
+    }
+
+    @RequestMapping("/protected")
+    public String getProtectedResource(HttpServletRequest request) throws Exception {
+        String result = null;
+        result = getFrom(protectedUrl, String.class);
+        return "result : <p>" + result + "!</p>";
+    }
 
     public <T> T getFrom(String url, Class<T> t) {
         return restTemplate.getForObject(URI.create(url), t);

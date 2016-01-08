@@ -12,4 +12,19 @@ public class ResourceController {
     public Object getMe() {
         return "access protected resource";
     }
+
+    @RequestMapping("/client1")
+    public Object getClient1Resources() {
+        return "access client1 resources";
+    }
+
+    @RequestMapping("/client2")
+    public Object getClient2Resources() {
+        return "access client2 resources";
+    }
+
+    @RequestMapping("/client3")
+    public Object getClient3Resources() {
+        return "access client3 resources";
+    }
 }
