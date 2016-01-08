@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerTokenServicesConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +53,7 @@ public class AuthenticationAndResourcesConfig {
     public static final String RESOURCE_ID = "test_resource";
 
 
+
     /**
      * 资源服务器配置
      */
@@ -92,6 +94,12 @@ public class AuthenticationAndResourcesConfig {
 
         Logger logger = LoggerFactory.getLogger(getClass());
 
+        @Value("${config.oauth2.privateKey}")
+        private String privateKey;
+
+        @Value("${config.oauth2.publicKey}")
+        private String publicKey;
+
         @Autowired
         private AuthenticationManager authenticationManager;
 
@@ -106,15 +114,17 @@ public class AuthenticationAndResourcesConfig {
 
         @Bean
         public JwtAccessTokenConverter accessTokenConverter() throws Exception {
-            KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
-            keyPairGen.initialize(2048); //不同的长度产生不同的key
-            KeyPair keyPair = keyPairGen.generateKeyPair();
+//            KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
+//            keyPairGen.initialize(2048); //不同的长度产生不同的key
+//            KeyPair keyPair = keyPairGen.generateKeyPair();
             JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-            jwtAccessTokenConverter.setKeyPair(keyPair);
-            Map keys = jwtAccessTokenConverter.getKey();
-            if (logger.isInfoEnabled()) {
-                logger.info("\n" + keys.toString());
-            }
+//            jwtAccessTokenConverter.setKeyPair(keyPair);
+//            Map keys = jwtAccessTokenConverter.getKey();
+//            if (logger.isInfoEnabled()) {
+//                logger.info("\n" + keys.toString());
+//            }
+            jwtAccessTokenConverter.setSigningKey(privateKey);
+            jwtAccessTokenConverter.setVerifierKey(publicKey);
             return jwtAccessTokenConverter;
         }
 
