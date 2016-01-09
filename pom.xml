@@ -12,7 +12,7 @@
         <module>client1</module>
         <module>client2</module>
         <module>client3</module>
-        <module>AuthoServer</module>
+        <module>AuthServer</module>
     </modules>
 
     <properties>
@@ -107,10 +107,10 @@
         <!--netflex-->
 
         <!--devtools-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+        <!--</dependency>-->
 
 
     </dependencies>

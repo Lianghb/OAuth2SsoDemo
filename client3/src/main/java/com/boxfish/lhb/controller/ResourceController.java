@@ -46,6 +46,5 @@ public class ResourceController {
     @RequestMapping("/protected")
     public String getProtectedResource(HttpServletRequest request) throws Exception {
         return "result : <p>" + resourceService.getResourceProtected() + "!</p>";
-
     }
 }

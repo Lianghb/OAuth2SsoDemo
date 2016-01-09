@@ -1,0 +1,82 @@
+server:
+  context-path: /server
+  port: 8090
+
+
+
+logging:
+  level:
+    com:
+      boxfish: info
+    org:
+      springframework:
+        security: debug
+        web: debug
+
+spring:
+  datasource:
+    url:  jdbc:mysql://192.168.0.100:3306/test?useUnicode=true&characterEncoding=utf8
+    username: boxfish
+    password: boxfish
+    driverClassName: com.mysql.jdbc.Driver
+    validation-query: SELECT 1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+  thymeleaf:
+    cache: false
+
+debug: true
+security:
+  user:
+    password: 111111
+
+config:
+    oauth2:
+        # openssl genrsa -out jwt.pem 2048
+        # openssl rsa -in jwt.pem
+        privateKey: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEpAIBAAKCAQEA3dT+zf7ZDRekv5qooJwjI8i5gcJhZGsh0xK4WgvXzkQS/Rep
+            f3CLW/b5HAYw04IGNHmoXHYA11lR8y46q91+OS54rd6gZjJpgNU/cKQfP1zcswEb
+            QXhRYCgbAlTzo5ZnvQtYAoMQOyFW3ekkdk2eD3NvfShujEl6zOPOoXYyMdTBKZZH
+            OKLPxeHAYQ3Jo7XoMCbAj/PbkriagSQJdabJQ1MczJSjuRrKO0wYfSTBhK4qFlC2
+            n0ObviSj1O1sNUc5fpwTsXPxkPv1YScMRrrzGq5E6TZrizEXF9Bma6T7yfEiut/i
+            JU0sfSEV0h9cwhprTpuRxGi4EwhqZoJSErqSTQIDAQABAoIBAE9dP9hFQDRt7BRc
+            6c2kbvIDg1MITz3VEmHoxan5qLj0I/MGvy6H/mPlpVRAZsGVOFEX4YNK+JwTKb2e
+            IYGRmfItTSGvj6Vgjdx47tyG62MI/zDPyYeP21VSo+8eo5g4XF8HKvKjH3B4ShLU
+            saXduRoAC7g0efCY7WVWb3vWxLiMohU3QGn1t26qL1IHBO+0VSxaoSsNTuLOP0zj
+            e/RYngnnQKHhbhV9KczCOOUscLqCNRY7c6asFMRPyVTsf8xwgAL0fF8IHCQ1j7eE
+            ErOVQu9RcRQi9JgdJ8rp6knMdRuNWJZ3nLGO2dw02OBHnhUIyYJKk26cmy12MGoO
+            Aj1Xo2UCgYEA8C35ZmkU8Yjv3i6bygxJTEUIIIEUiDKptDeFankP4Ue9WZut1y30
+            uanz5YADrIK8Je/sjwLsEaHI4atf/dlZgVhFCLvYLy8Eh8CEFWjfQsElgPCQ/EJv
+            lCGVZgnPQdGzsU/s4ve6m9Th5mmgxNR5xBOrTjI6RSFigbcREN/FPgsCgYEA7HGi
+            paR69BTQRwOGol/kIeOAN7oTe5jG6hi4Gx42H2iy4CUN+VpXaXnQwx29BHeOr7x6
+            eQ83N3osPwP8EZOY8ffB4pmVkRghM8VYk3LqFZlkE22MJqfCHPOzXKqQZYnwYWyx
+            pjx1hJpUSgwcIPpQ47ozXAw0CpvFqRhGVPUNoAcCgYEAugZhzPhGyG0PnD7tWyj4
+            /KHbEZHonTTgTD1UkIsDybEO74CsvKVTjxobVf442jzIDXou9vWEcoOkW2WpC6x0
+            rsH3djRH1QPNtndd1ldL1SBUM/If2cJ7OXhphobCiHArhYIqMAE//8J61UOqycjo
+            Jv41CHPOvgyFh4KLLU6kLtECgYB7HayQTbYMFC5jW82mDQJQNxLTcZuldubUjGyJ
+            ClEqR60kk4bUORtc+6YdgwWiJtLwZNbs5GRfCcmyQlPlnxI7pEObx1cfBw56056M
+            oICNIKMAjsE0e5PS2X6imNm5VXsKb7uNENwsYOPU7rtS3KRz/8ewfVY30+a3ZsFw
+            iW0/zwKBgQCor1QEnUFPpnq6wMitqZzB0IK0Fj20SGkoQWeLNA4oudpObH/NiJZ0
+            jYS4BsAGCcK1Gob58p3pIWYq9B3A3tHnJsmiE6Y5BOFcw6DVvuJUeQ+sPJyrs1iL
+            pw00XX1M42w90QRw/BEsvBf8DZPa7oVsMmk4xhJ9YVdVeDI/wGUTEQ==
+            -----END RSA PRIVATE KEY-----
+        # openssl rsa -in jwt.pem -pubout
+        publicKey: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3dT+zf7ZDRekv5qooJwj
+            I8i5gcJhZGsh0xK4WgvXzkQS/Repf3CLW/b5HAYw04IGNHmoXHYA11lR8y46q91+
+            OS54rd6gZjJpgNU/cKQfP1zcswEbQXhRYCgbAlTzo5ZnvQtYAoMQOyFW3ekkdk2e
+            D3NvfShujEl6zOPOoXYyMdTBKZZHOKLPxeHAYQ3Jo7XoMCbAj/PbkriagSQJdabJ
+            Q1MczJSjuRrKO0wYfSTBhK4qFlC2n0ObviSj1O1sNUc5fpwTsXPxkPv1YScMRrrz
+            Gq5E6TZrizEXF9Bma6T7yfEiut/iJU0sfSEV0h9cwhprTpuRxGi4EwhqZoJSErqS
+            TQIDAQAB
+            -----END PUBLIC KEY-----
