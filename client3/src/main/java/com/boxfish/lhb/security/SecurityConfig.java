@@ -1,5 +1,5 @@
 
-package com.boxfish.lhb.security.conf;
+package com.boxfish.lhb.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 所有用户可访问
      */
 
-    private final String[] permitedUrls = {"/myplugins/**", "/dist/**"};
+    private final String[] permitedUrls = {"/myplugins/**", "/dist/**", "/login"};
 
 
     /**
@@ -53,44 +53,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] dbaUrls = {"/dba/**"};
 
-    @Autowired
-    CustomUserDetailsService service;
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        logger.debug("configure(AuthenticationManagerBuilder auth)");
-//        PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
-//        auth.userDetailsService(service).passwordEncoder(passwordEncoder);
-//    }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         logger.debug("configure(HttpSecurity http)");
-//        http
-//                .logout()
-//                .logoutUrl("/logout")
-//                .invalidateHttpSession(true)
-//                .and()
-//                .formLogin()
-//                .loginProcessingUrl("/login")
-//                .loginPage("/login").permitAll()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(permitedUrls).permitAll()
-//                .anyRequest().authenticated()
-//                .antMatchers(userUrls).hasRole("USER")
-//                .antMatchers(adminUrls).hasRole("ADMIN")
-//                .antMatchers(dbaUrls).hasRole("DBA")
-//        ;
         http
                 .antMatcher("/**")
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()
-                .antMatchers("/login").permitAll()
-//                .antMatchers(permitedUrls).permitAll()
-
+                .antMatchers(permitedUrls).permitAll()
+                .antMatchers(userUrls).access("hasRole('ROLE_USER')")
+                .antMatchers(dbaUrls).access("hasRole('ROLE_DBA')")
+                .antMatchers(adminUrls).access("hasRole('ROLE_ADMIN')")
         ;
     }
 }
