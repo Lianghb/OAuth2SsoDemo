@@ -70,24 +70,6 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!--mysql-->
-        <!--<dependency>-->
-        <!--<groupId>mysql</groupId>-->
-        <!--<artifactId>mysql-connector-java</artifactId>-->
-        <!--</dependency>-->
-
-        <!-- commons -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.commons</groupId>-->
-        <!--<artifactId>commons-lang3</artifactId>-->
-        <!--<version>3.4</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>commons-beanutils</groupId>-->
-        <!--<artifactId>commons-beanutils</artifactId>-->
-        <!--</dependency>-->
-
-
         <!-- OAuth2 -->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
@@ -123,6 +105,12 @@
         <!--</dependency>-->
 
         <!--netflex-->
+
+        <!--devtools-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
 
 
     </dependencies>

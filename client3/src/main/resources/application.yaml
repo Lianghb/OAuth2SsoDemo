@@ -30,7 +30,7 @@ spring:
 logging:
   level:
     org:
-      springframework: info
+      springframework: debug
       hibernate:  info
     com:
       boxfish: info

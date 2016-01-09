@@ -50,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">simple project</a>
+            <a class="navbar-brand" href="/client3/simple/">simple project</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -70,7 +70,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="/logout" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a th:href="@{/logout}" href="/logout" id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -97,7 +97,7 @@
                         <a href="#"><i class="fa fa-table fa-fw"></i> tables<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/client3/simple/user/simpleUserTable"> simple-user</a>
+                                <a th:href="@{/user/simpleUserTable}" href="/user/simpleUserTable"> simple-user</a>
                             </li>
                         </ul>
                     </li>
